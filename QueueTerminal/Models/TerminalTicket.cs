@@ -15,7 +15,7 @@ namespace QueuServer.Models
         public int id { get; set; }
 
         [DataMember(Name = "n")]
-        public int number { get; set; }
+        public string number { get; set; }
 
         [DataMember(Name = "t")]
         public int type { get; set; }

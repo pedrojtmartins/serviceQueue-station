@@ -30,19 +30,26 @@ namespace QueuServer
 
         ~ServerManager()
         {
-            stream.Close();
+            if (stream != null)
+                stream.Close();
         }
 
-        public void Initialize()
+        public bool Initialize()
         {
             tcpClient = new TcpClient();
-            tcpClient.Connect(Constants.IP_ADDRESS, Constants.IP_PORT);
+            try { tcpClient.Connect(Constants.IP_ADDRESS, Constants.IP_PORT); }
+            catch (Exception e)
+            {
+                return false;
+            }
+
             stream = tcpClient.GetStream();
 
             thread = new Thread(() => ListenToServer(stream));
             thread.Start();
 
             SendIdentification();
+            return true;
         }
 
         private void SendIdentification()

@@ -2,12 +2,8 @@
 using QueueTerminal.Models;
 using QueuServer;
 using QueuServer.Managers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace QueueTerminal.Controllers
 {
@@ -21,14 +17,16 @@ namespace QueueTerminal.Controllers
         public MainWindowController(MainWindow window)
         {
             this.window = window;
-
             InitializeServer();
         }
 
         private void InitializeServer()
         {
             serverManager = new ServerManager(this);
-            serverManager.Initialize();
+            //new Thread(() => serverManager.Initialize()).Start();
+            var initialized = serverManager.Initialize();
+            if (!initialized)
+                window.DisplayNotInitialized();
         }
 
         public async Task RequestNextTicket()
@@ -50,6 +48,10 @@ namespace QueueTerminal.Controllers
         {
             this.data = update;
             window.NewListReceived(data);
+
+            var currTicket = update.GetCurrentTicket();
+            if (currTicket != null)
+                window.UpdateCurrentTicket(currTicket.number);
         }
     }
 }
