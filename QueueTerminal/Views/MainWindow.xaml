@@ -7,37 +7,61 @@
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
         Title="MainWindow" Height="200" Width="400">
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
 
-            <TextBlock FontSize="14" HorizontalAlignment="Center">Senha atual</TextBlock>
-            <TextBlock Name="currentTicket" FontSize="20" HorizontalAlignment="Center" Grid.Row="1">A53</TextBlock>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock FontSize="14" HorizontalAlignment="Center">Senha atual</TextBlock>
+                <TextBlock Name="currentTicket" FontSize="20" HorizontalAlignment="Center" Grid.Row="1">A53</TextBlock>
+            </Grid>
+
+            <Button Width="150" Height="150" Click="Click_Next" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid>
+                    <Image Source="..\Images\orange_btn.png" />
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" FontSize="22" Margin="3,2,0,0">Próximo</TextBlock>
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="22">Próximo</TextBlock>
+                </Grid>
+            </Button>
         </Grid>
 
-        <Button Width="150" Height="150" Click="Click_Next" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Grid>
-                <Image Source="..\Images\orange_btn.png" />
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" FontSize="22" Margin="3,2,0,0">Próximo</TextBlock>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="22">Próximo</TextBlock>
-            </Grid>
+                <Grid Name="config" Visibility="Hidden" Background="White">
+           
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="100">Número do posto</TextBlock>
+                    <TextBox Width="150"></TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="100">Ip do servidor</TextBlock>
+                    <TextBox Width="150"></TextBox>
+                </StackPanel>
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="20" Height="20" Click="Click_Restart">
+                    <TextBlock Width="100">Restart</TextBlock>
+                </Button>
+            </StackPanel>
+            
+        </Grid>
+
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="20" Height="20" Click="Click_Config">
+            <Image Source="..\Images\orange_btn.png" />
         </Button>
     </Grid>
 </Window>

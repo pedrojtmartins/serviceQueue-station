@@ -20,10 +20,14 @@ namespace QueueTerminal.Controllers
             InitializeServer();
         }
 
+        public void Restart()
+        {
+            InitializeServer();
+        }
+
         private void InitializeServer()
         {
             serverManager = new ServerManager(this);
-            //new Thread(() => serverManager.Initialize()).Start();
             var initialized = serverManager.Initialize();
             if (!initialized)
                 window.DisplayNotInitialized();

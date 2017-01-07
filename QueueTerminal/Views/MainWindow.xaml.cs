@@ -35,7 +35,25 @@ namespace QueueTerminal
 
         public void DisplayNotInitialized()
         {
-            
+
+        }
+
+        public void Click_Config()
+        {
+
+        }
+
+        private void Click_Config(object sender, RoutedEventArgs e)
+        {
+            if (config.Visibility == Visibility.Visible)
+                config.Visibility = Visibility.Hidden;
+            else
+                config.Visibility = Visibility.Visible;
+        }
+
+        private void Click_Restart(object sender, RoutedEventArgs e)
+        {
+            //controller = new MainWindowController(this);
         }
     }
 }
