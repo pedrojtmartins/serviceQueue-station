@@ -11,17 +11,19 @@ namespace QueueTerminal.Models
     [DataContract]
     public class ServerUpdate
     {
+        [DataMember(Name = "nt")]
+        public TerminalTicket nextTicket { get; set; }
+
         [DataMember(Name = "t")]
-        public List<TerminalTicket> Tickets { get; set; }
+        public List<TerminalTicket> tickets { get; set; }
 
         public TerminalTicket GetCurrentTicket()
         {
-            if (Tickets == null || Tickets.Count == 0)
+            if (nextTicket == null)
                 return null;
 
-            foreach (var t in Tickets)
-                if (t.clientId == _AppData.TerminalId)
-                    return t;
+            if (nextTicket.clientId == _AppData.TerminalId)
+                return nextTicket;
 
             return null;
         }
