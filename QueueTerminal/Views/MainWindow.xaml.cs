@@ -33,9 +33,19 @@ namespace QueueTerminal
             currentTicket.Text = ticket;
         }
 
+        public void DisplayInitialized()
+        {
+            Dispatcher.Invoke(() => { connecting.Visibility = Visibility.Hidden; });
+        }
+
         public void DisplayNotInitialized()
         {
-
+            Dispatcher.Invoke(() =>
+            {
+                MessageBoxResult result = MessageBox.Show("Não foi possível establecer ligação ao servidor.", "", MessageBoxButton.OK, MessageBoxImage.Question);
+                if (result == MessageBoxResult.OK)
+                    Application.Current.Shutdown();
+            });
         }
 
         public void Click_Config()

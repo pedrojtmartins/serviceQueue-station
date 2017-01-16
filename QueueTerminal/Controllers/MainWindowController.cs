@@ -17,20 +17,23 @@ namespace QueueTerminal.Controllers
         public MainWindowController(MainWindow window)
         {
             this.window = window;
-            InitializeServer();
+
+            serverManager = new ServerManager(this);
+            new Thread(() => InitializeServer()).Start();
+        }
+
+        private void InitializeServer()
+        {
+            var initialized = serverManager.Initialize();
+            if (initialized)
+                window.DisplayInitialized();
+            else
+                window.DisplayNotInitialized();
         }
 
         public void Restart()
         {
             InitializeServer();
-        }
-
-        private void InitializeServer()
-        {
-            serverManager = new ServerManager(this);
-            var initialized = serverManager.Initialize();
-            if (!initialized)
-                window.DisplayNotInitialized();
         }
 
         public async Task RequestNextTicket()

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QueuServer"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
-        Title="MainWindow" Height="200" Width="400">
+        Title="MainWindow" Height="200" Width="350">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -15,24 +15,14 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
-
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Name="currentTicket" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="1">A53</TextBlock>
                 <TextBlock FontSize="14" HorizontalAlignment="Center">Senha atual</TextBlock>
-                <TextBlock Name="currentTicket" FontSize="20" HorizontalAlignment="Center" Grid.Row="1">A53</TextBlock>
-            </Grid>
+            </StackPanel>
 
-            <Button Width="150" Height="150" Click="Click_Next" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Background="Transparent" BorderThickness="0" Width="150" Height="150" Click="Click_Next" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid>
                     <Image Source="..\Images\orange_btn.png" />
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" FontSize="22" Margin="3,2,0,0">Próximo</TextBlock>
@@ -41,8 +31,8 @@
             </Button>
         </Grid>
 
-                <Grid Name="config" Visibility="Hidden" Background="White">
-           
+        <Grid Name="config" Visibility="Hidden" Background="White">
+
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="100">Número do posto</TextBlock>
@@ -57,11 +47,15 @@
                     <TextBlock Width="100">Restart</TextBlock>
                 </Button>
             </StackPanel>
-            
+
         </Grid>
 
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="20" Height="20" Click="Click_Config">
             <Image Source="..\Images\orange_btn.png" />
         </Button>
+
+        <Grid Name="connecting" Grid.ColumnSpan="2" Background="#F0000000">
+            <TextBlock  Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16">Connecting...</TextBlock>
+        </Grid>
     </Grid>
 </Window>
