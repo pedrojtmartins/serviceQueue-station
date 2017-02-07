@@ -12,9 +12,15 @@ namespace QueuTerminal.Models.Terminal
     class ConnectionIdentification
     {
         [DataMember(Name = "t")]
-        public bool IsTerminal { get { return true; } }
+        public bool IsTerminal { get; set; }
 
         [DataMember(Name = "i")]
-        public int TerminalId { get { return _AppData.TerminalId; } }
+        public int TerminalId { get; set; }
+
+        public ConnectionIdentification()
+        {
+            IsTerminal = true;
+            TerminalId = _AppData.TerminalId;
+        }
     }
 }

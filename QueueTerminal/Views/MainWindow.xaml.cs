@@ -30,7 +30,10 @@ namespace QueueTerminal
 
         public void UpdateCurrentTicket(string ticket)
         {
-            currentTicket.Text = ticket;
+            this.Dispatcher.Invoke(() =>
+            {
+                currentTicket.Text = ticket;
+            });
         }
 
         public void DisplayNotInitialized()
@@ -54,6 +57,14 @@ namespace QueueTerminal
         private void Click_Restart(object sender, RoutedEventArgs e)
         {
             //controller = new MainWindowController(this);
+        }
+
+        public void NoMoreTicketsAvailable()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                currentTicket.Text = "Sem senhas novas.";
+            });
         }
     }
 }

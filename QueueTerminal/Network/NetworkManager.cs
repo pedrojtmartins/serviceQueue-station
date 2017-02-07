@@ -45,10 +45,10 @@ namespace QueuServer
 
             stream = tcpClient.GetStream();
 
+            SendIdentification();
+
             thread = new Thread(() => ListenToServer(stream));
             thread.Start();
-
-            SendIdentification();
             return true;
         }
 

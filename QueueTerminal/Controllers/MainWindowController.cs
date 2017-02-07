@@ -17,6 +17,7 @@ namespace QueueTerminal.Controllers
         public MainWindowController(MainWindow window)
         {
             this.window = window;
+            data = new ServerUpdate();
             InitializeServer();
         }
 
@@ -50,12 +51,21 @@ namespace QueueTerminal.Controllers
 
         public void NewListReceived(ServerUpdate update)
         {
+            if (update.nextTicket == null)
+            {
+                window.NoMoreTicketsAvailable();
+                return;
+            }
+
             this.data = update;
             window.NewListReceived(data);
 
             var currTicket = update.GetCurrentTicket();
             if (currTicket != null)
-                window.UpdateCurrentTicket(currTicket.number);
+            {
+                string sTicketType = (currTicket.type == 0 ? "A" : "B") + currTicket.number;
+                window.UpdateCurrentTicket(sTicketType);
+            }
         }
     }
 }
