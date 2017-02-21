@@ -4,6 +4,7 @@ using QueuServer;
 using QueuServer.Managers;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 namespace QueueTerminal.Controllers
 {
@@ -14,21 +15,17 @@ namespace QueueTerminal.Controllers
 
         public ServerUpdate data { get; set; }
 
-        public MainWindowController(MainWindow window)
+        public MainWindowController(MainWindow window, string ip)
         {
             this.window = window;
+
             data = new ServerUpdate();
-            InitializeServer();
+            InitializeServer(ip);
         }
 
-        public void Restart()
+        private void InitializeServer(string ip)
         {
-            InitializeServer();
-        }
-
-        private void InitializeServer()
-        {
-            serverManager = new ServerManager(this);
+            serverManager = new ServerManager(this, ip);
             var initialized = serverManager.Initialize();
             if (!initialized)
                 window.DisplayNotInitialized();
@@ -66,6 +63,11 @@ namespace QueueTerminal.Controllers
                 string sTicketType = (currTicket.type == 0 ? "A" : "B") + currTicket.number;
                 window.UpdateCurrentTicket(sTicketType);
             }
+        }
+
+        internal void CloseConnection()
+        {
+            serverManager.CloseConnection();
         }
     }
 }

@@ -2,6 +2,7 @@
 using QueueTerminal.Models;
 using System.Windows;
 using System;
+using QueueTerminal.Config;
 
 namespace QueueTerminal
 {
@@ -15,8 +16,17 @@ namespace QueueTerminal
         public MainWindow()
         {
             InitializeComponent();
+            PopulateConfig();
+        }
 
-            controller = new MainWindowController(this);
+        private void PopulateConfig()
+        {
+            var data = ConfigHelper.GetConfig();
+            if (data == null || data.Length != 2)
+                return;
+
+            numP.Text = data[0];
+            ip.Text = data[1];
         }
 
         public void NewListReceived(ServerUpdate update)
@@ -46,17 +56,15 @@ namespace QueueTerminal
 
         }
 
-        private void Click_Config(object sender, RoutedEventArgs e)
-        {
-            if (config.Visibility == Visibility.Visible)
-                config.Visibility = Visibility.Hidden;
-            else
-                config.Visibility = Visibility.Visible;
-        }
-
         private void Click_Restart(object sender, RoutedEventArgs e)
         {
-            //controller = new MainWindowController(this);
+            string sPostNum = numP.Text;
+            string sIp = ip.Text;
+
+            controller = new MainWindowController(this, sIp);
+
+            ConfigHelper.SaveConfig(sPostNum, sIp);
+            config.Visibility = Visibility.Hidden;
         }
 
         public void NoMoreTicketsAvailable()
@@ -65,6 +73,11 @@ namespace QueueTerminal
             {
                 currentTicket.Text = "Sem senhas novas.";
             });
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            controller.CloseConnection();
         }
     }
 }

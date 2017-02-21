@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QueuServer"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
-        Title="MainWindow" Height="200" Width="400">
+        Title="MainWindow" Height="200" Width="400" Closing="Window_Closing">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -18,19 +18,8 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock FontSize="14" HorizontalAlignment="Center">Senha atual</TextBlock>
-                <TextBlock Name="currentTicket" FontSize="20" HorizontalAlignment="Center" Grid.Row="1">A53</TextBlock>
-            </Grid>
+            <TextBlock FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom">Senha atual</TextBlock>
+            <TextBlock Name="currentTicket" FontSize="20" HorizontalAlignment="Center" Grid.Row="1"></TextBlock>
 
             <Button Width="150" Height="150" Click="Click_Next" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid>
@@ -41,27 +30,24 @@
             </Button>
         </Grid>
 
-                <Grid Name="config" Visibility="Hidden" Background="White">
-           
-            <StackPanel Orientation="Vertical">
+        <Grid Name="config" Background="White">
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Width="100">Número do posto</TextBlock>
-                    <TextBox Width="150"></TextBox>
+                    <TextBox Name="numP" Width="100"></TextBox>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <TextBlock Width="100">Ip do servidor</TextBlock>
-                    <TextBox Width="150"></TextBox>
+                    <TextBox Name="ip" Width="100"></TextBox>
                 </StackPanel>
-                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="20" Height="20" Click="Click_Restart">
-                    <TextBlock Width="100">Restart</TextBlock>
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Click_Restart" Margin="0,20,0,0">
+                    <TextBlock Width="50" TextAlignment="Center">Start</TextBlock>
                 </Button>
             </StackPanel>
-            
+
         </Grid>
 
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="20" Height="20" Click="Click_Config">
-            <Image Source="..\Images\orange_btn.png" />
-        </Button>
     </Grid>
 </Window>
