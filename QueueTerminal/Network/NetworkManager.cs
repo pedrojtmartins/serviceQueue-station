@@ -17,27 +17,24 @@ namespace QueuServer
 {
     class ServerManager
     {
+        string ip;
+
         IServerUpdateListener listener;
 
         TcpClient tcpClient;
         NetworkStream stream;
         Thread thread;
 
-        public ServerManager(IServerUpdateListener listener)
+        public ServerManager(IServerUpdateListener listener, string ip)
         {
             this.listener = listener;
-        }
-
-        ~ServerManager()
-        {
-            if (stream != null)
-                stream.Close();
+            this.ip = ip;
         }
 
         public bool Initialize()
         {
             tcpClient = new TcpClient();
-            try { tcpClient.Connect(Constants.IP_ADDRESS, Constants.IP_PORT); }
+            try { tcpClient.Connect(ip, Constants.IP_PORT); }
             catch (Exception e)
             {
                 return false;
@@ -70,15 +67,27 @@ namespace QueuServer
             while (true)
             {
                 var buffer = new byte[Constants.bufferSize];
-                int size = stream.Read(buffer, 0, buffer.Length);
-                if (size > 0)
-                    ComputeServerRequest(buffer, size);
-                else
+
+                try
                 {
-                    //TODO remove socket
-                    throw new Exception();
+                    int size = stream.Read(buffer, 0, buffer.Length);
+                    if (size > 0)
+                        ComputeServerRequest(buffer, size);
+                }
+                catch (Exception e)
+                {
+                    return;
                 }
             }
+        }
+
+        internal void CloseConnection()
+        {
+            if (stream != null)
+                stream.Close();
+
+            if (thread != null && thread.IsAlive)
+                thread.Abort();
         }
 
         private void ComputeServerRequest(byte[] buffer, int size)
