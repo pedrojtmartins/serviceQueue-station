@@ -61,6 +61,10 @@ namespace QueueTerminal
             string sPostNum = numP.Text;
             string sIp = ip.Text;
 
+            int iPost = 0;
+            int.TryParse(sPostNum, out iPost);
+            _AppData.TerminalId = iPost;
+
             controller = new MainWindowController(this, sIp);
 
             ConfigHelper.SaveConfig(sPostNum, sIp);

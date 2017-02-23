@@ -21,9 +21,9 @@
             <TextBlock FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom">Senha atual</TextBlock>
             <TextBlock Name="currentTicket" FontSize="20" HorizontalAlignment="Center" Grid.Row="1"></TextBlock>
 
-            <Button Width="150" Height="150" Click="Click_Next" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Width="150" Height="150" Click="Click_Next" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="0" Background="Transparent">
                 <Grid>
-                    <Image Source="..\Images\orange_btn.png" />
+                    <Image Source="..\Images\orange_btn.png"  />
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" FontSize="22" Margin="3,2,0,0">Próximo</TextBlock>
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="22">Próximo</TextBlock>
                 </Grid>

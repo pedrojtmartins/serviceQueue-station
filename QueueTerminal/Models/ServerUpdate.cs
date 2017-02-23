@@ -22,7 +22,7 @@ namespace QueueTerminal.Models
             if (nextTicket == null)
                 return null;
 
-            if (nextTicket.clientId == _AppData.TerminalId)
+            if (nextTicket.clientId.Equals(_AppData.TerminalId))
                 return nextTicket;
 
             return null;
