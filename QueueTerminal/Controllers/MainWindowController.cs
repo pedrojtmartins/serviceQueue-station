@@ -67,7 +67,8 @@ namespace QueueTerminal.Controllers
 
         internal void CloseConnection()
         {
-            serverManager.CloseConnection();
+            if (serverManager != null)
+                serverManager.CloseConnection();
         }
     }
 }
