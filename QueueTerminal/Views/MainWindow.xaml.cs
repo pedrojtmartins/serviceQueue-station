@@ -81,7 +81,8 @@ namespace QueueTerminal
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            controller.CloseConnection();
+            if (controller != null)
+                controller.CloseConnection();
         }
     }
 }
