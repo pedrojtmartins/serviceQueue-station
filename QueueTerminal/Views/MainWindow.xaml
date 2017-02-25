@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QueuServer"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
-        Title="MainWindow" Height="200" Width="400" Closing="Window_Closing">
+        Title="Terminal" Height="200" Width="400" Closing="Window_Closing">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -43,7 +43,7 @@
                     <TextBox Name="ip" Width="100"></TextBox>
                 </StackPanel>
                 <Button VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Click_Restart" Margin="0,20,0,0">
-                    <TextBlock Width="50" TextAlignment="Center">Start</TextBlock>
+                    <TextBlock Width="50" TextAlignment="Center">Iniciar</TextBlock>
                 </Button>
             </StackPanel>
 
