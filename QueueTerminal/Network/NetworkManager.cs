@@ -40,6 +40,9 @@ namespace QueuServer
                 return false;
             }
 
+            if (!tcpClient.Connected)
+                return false;
+
             stream = tcpClient.GetStream();
 
             SendIdentification();
@@ -76,6 +79,7 @@ namespace QueuServer
                 }
                 catch (Exception e)
                 {
+                    listener.NewListReceived(null);
                     return;
                 }
             }
@@ -103,8 +107,15 @@ namespace QueuServer
             if (stream == null || !stream.CanWrite || data == null || data.Length == 0)
                 return;
 
-            var buffer = Encoding.ASCII.GetBytes(data);
-            await stream.WriteAsync(buffer, 0, buffer.Length);
+            try
+            {
+                var buffer = Encoding.ASCII.GetBytes(data);
+                await stream.WriteAsync(buffer, 0, buffer.Length);
+            }
+            catch (Exception e)
+            {
+                listener.NewListReceived(null);
+            }
         }
     }
 }

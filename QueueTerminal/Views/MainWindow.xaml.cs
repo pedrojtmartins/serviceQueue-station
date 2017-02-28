@@ -31,10 +31,22 @@ namespace QueueTerminal
 
         public void NewListReceived(ServerUpdate update)
         {
+            this.Dispatcher.Invoke(() =>
+            {    if (update == null)
+                {
+                    errorTB.Text = "A ligação ao servidor foi perdida.\nAssim que este esteja operacional reinicie esta aplicação.";
+                    waiting.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    waiting.Visibility = Visibility.Hidden;
+                }
+            });
         }
 
         private async void Click_Next(object sender, RoutedEventArgs e)
         {
+            waiting.Visibility = Visibility.Visible;
             await controller.RequestNextTicket();
         }
 
@@ -48,7 +60,7 @@ namespace QueueTerminal
 
         public void DisplayNotInitialized()
         {
-
+            config.Visibility = Visibility.Visible;
         }
 
         public void Click_Config()
@@ -58,6 +70,8 @@ namespace QueueTerminal
 
         private void Click_Restart(object sender, RoutedEventArgs e)
         {
+            config.Visibility = Visibility.Hidden;
+
             string sPostNum = numP.Text;
             string sIp = ip.Text;
 
@@ -68,13 +82,14 @@ namespace QueueTerminal
             controller = new MainWindowController(this, sIp);
 
             ConfigHelper.SaveConfig(sPostNum, sIp);
-            config.Visibility = Visibility.Hidden;
         }
 
         public void NoMoreTicketsAvailable()
         {
+
             this.Dispatcher.Invoke(() =>
             {
+                waiting.Visibility = Visibility.Hidden;
                 currentTicket.Text = "Sem senhas novas.";
             });
         }

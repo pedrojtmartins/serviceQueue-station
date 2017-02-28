@@ -49,5 +49,10 @@
 
         </Grid>
 
+
+        <Grid Name="waiting" Background="DarkGray" Visibility="Hidden"  >
+            <TextBlock Name="errorTB" HorizontalAlignment="Center" VerticalAlignment="Center">A processar...</TextBlock>
+        </Grid>
+
     </Grid>
 </Window>

@@ -48,6 +48,12 @@ namespace QueueTerminal.Controllers
 
         public void NewListReceived(ServerUpdate update)
         {
+            if (update == null)
+            {
+                window.NewListReceived(null);
+                return;
+            }
+
             if (update.nextTicket == null)
             {
                 window.NoMoreTicketsAvailable();
